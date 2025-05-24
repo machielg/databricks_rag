@@ -1,0 +1,19 @@
+bundle:
+  name: db-rag
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catalog to use for Unity Catalog resources
+    default: db_rag
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-12345678-abcd.cloud.databricks.com
+    variables:
+      catalog: db_rag

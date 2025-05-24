@@ -1,0 +1,32 @@
+resources:
+  jobs:
+    rag_pipeline:
+      name: DB RAG Pipeline
+      job_clusters:
+        - job_cluster_key: main
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: Standard_DS3_v2
+            num_workers: 2
+            custom_tags:
+              ResourceClass: MultiNode
+      tasks:
+        - task_key: ingest_data
+          job_cluster_key: main
+          python_wheel_task:
+            package_name: db_rag
+            entry_point: ingest_data
+        - task_key: process_embeddings
+          job_cluster_key: main
+          depends_on:
+            - task_key: ingest_data
+          python_wheel_task:
+            package_name: db_rag
+            entry_point: process_embeddings
+        - task_key: create_vector_index
+          job_cluster_key: main
+          depends_on:
+            - task_key: process_embeddings
+          python_wheel_task:
+            package_name: db_rag
+            entry_point: create_vector_index
