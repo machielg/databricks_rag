@@ -6,13 +6,13 @@ authors = ["Your Name <you@example.com>"]
 packages = [{include = "db_rag", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 pyspark = "^3.4.0"
 databricks-sdk = "^0.18.0"
-mlflow = "^2.8.0"
-openai = "^1.0.0"
-sentence-transformers = "^2.2.0"
-chromadb = "^0.4.0"
+# mlflow = "^2.8.0"  # Heavy dependency - add when needed
+# openai = "^1.0.0"  # Add when implementing OpenAI integration
+# sentence-transformers = "^2.2.0"  # Heavy PyTorch dependency - add when needed
+# chromadb = "^0.4.0"  # Heavy vector DB dependency - add when needed
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
@@ -32,7 +32,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 88
-target-version = ['py38']
+target-version = ['py311']
 
 [tool.isort]
 profile = "black"
